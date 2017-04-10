@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#FFC6C6C6" >
+
+    <!-- 正常时 -->
+    <item android:drawable="@drawable/btn_normal_shape"/>
+
+</ripple>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_java">
+
+    <target
+        android:name="first"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="sencond"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="third"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="fourth"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="fifth"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="sixth"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="seventh"
+        android:animation="@animator/main_anim_path" />
+
+    <target
+        android:name="eighth"
+        android:animation="@animator/main_anim_path" />
+
+</animated-vector>
