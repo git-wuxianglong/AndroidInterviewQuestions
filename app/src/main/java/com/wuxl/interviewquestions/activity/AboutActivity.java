@@ -42,8 +42,12 @@ public class AboutActivity extends AppCompatActivity {
     TextView versionName;
     @Bind(R.id.versionDescription)
     LinearLayout versionDescription;
+    @Bind(R.id.githubUrl)
+    LinearLayout githubUrl;
 
     private Snackbar snackbar = null;
+
+    private static final String PROJECT_GITHUB_URL = "https://github.com/git-wuxianglong/AndroidInterviewQuestions";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,14 +64,14 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.submit, R.id.versionDescription, R.id.alipay})
+    @OnClick({R.id.submit, R.id.versionDescription, R.id.githubUrl, R.id.alipay})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.versionDescription:
                 //版本更新说明
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(AboutActivity.this);
                 dialog.setTitle("版本更新说明");
-                dialog.setMessage("1：修复了一个bug\n\n2：增加了简单的自动缓存，列表有多少条数据就缓存多少条，直接覆盖存储，不会有数据冗余。由于时间匆忙，没怎么测试\n\n3：下个版本增加清除缓存吧，最近有点忙，感谢大家的反馈");
+                dialog.setMessage("项目开源，欢迎大家star和提交issue.");
                 dialog.setPositiveButton("确定", null);
                 dialog.show();
                 break;
@@ -94,6 +98,14 @@ public class AboutActivity extends AppCompatActivity {
                 } else {
                     showSnackBar(view, "还没填写问题");
                 }
+                break;
+            case R.id.githubUrl:
+                //跳转到到github项目页
+                Intent it = new Intent();
+                it.setAction(Intent.ACTION_VIEW);
+                Uri content_url = Uri.parse(PROJECT_GITHUB_URL);
+                it.setData(content_url);
+                startActivity(it);
                 break;
             case R.id.alipay:
                 //支付宝捐赠

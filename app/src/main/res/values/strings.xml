@@ -7,6 +7,8 @@
     <string name="text_about">所有内容均来自互联网，如有侵权请联系我删除，面试题我有空就会更新，大家也可以在下面进行提交。</string>
     <string name="text_explain">声明</string>
     <string name="text_version_name">版本说明</string>
+    <string name="text_github_url">项目已开源到Github</string>
+    <string name="text_git_wuxianglong">git-wuxianglong</string>
     <string name="text_alipay_donate">支付宝打赏</string>
     <string name="text_donate_explain">如果觉得我收集的面试题对您有用，请随意打赏。</string>
 
