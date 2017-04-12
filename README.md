@@ -11,4 +11,4 @@
 [小米应用商店](http://app.mi.com/details?id=com.wuxl.interviewquestions&ref=search)  
 [腾讯应用宝](http://sj.qq.com/myapp/detail.htm?apkName=com.wuxl.interviewquestions)  
 
-> 欢迎大家下载使用！  
+欢迎大家下载使用！  
