@@ -5,7 +5,7 @@
 
 > 目前已经上线多个平台：  
 >  
-> > [360手机助手应用市场](http://zhushou.360.cn/detail/index/soft_id/3654436?recrefer=SE_D_android%E9%9D%A2%E8%AF%95%E9%A2%98)  
+> > ![360手机助手应用市场](http://zhushou.360.cn/detail/index/soft_id/3654436?recrefer=SE_D_android%E9%9D%A2%E8%AF%95%E9%A2%98) 
 [豌豆荚（阿里应用分发平台）](http://www.wandoujia.com/apps/com.wuxl.interviewquestions)  
 [百度手机助手](http://shouji.baidu.com/software/11096563.html)  
 [小米应用商店](http://app.mi.com/details?id=com.wuxl.interviewquestions&ref=search)  
