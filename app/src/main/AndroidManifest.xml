@@ -38,7 +38,7 @@
         <!-- bugly渠道统计 -->
         <meta-data
             android:name="BUGLY_APP_CHANNEL"
-            android:value="" />
+            android:value="酷安" />
 
         <activity
             android:name=".activity.QuestionListActivity"
