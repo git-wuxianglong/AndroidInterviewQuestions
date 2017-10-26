@@ -15,5 +15,6 @@
     <string name="java_questions">Java面试题</string>
     <string name="android_base_questions">Android基础面试题</string>
     <string name="android_senior_questions">Android高级面试题</string>
+    <string name="java_web_questions">JavaWeb面试题</string>
 
 </resources>

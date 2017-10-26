@@ -19,6 +19,7 @@ import com.wuxl.interviewquestions.R;
 import com.wuxl.interviewquestions.adapter.MyRecyclerViewAdapter;
 import com.wuxl.interviewquestions.bean.AndroidSenior;
 import com.wuxl.interviewquestions.bean.JavaQuestions;
+import com.wuxl.interviewquestions.bean.JavaWebQuestions;
 import com.wuxl.interviewquestions.bean.Subject;
 import com.wuxl.interviewquestions.utils.CacheUtils;
 
@@ -34,17 +35,19 @@ import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_BASE_DIR;
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_BASE_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_SENIOR_DIR;
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_SENIOR_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_QUESTION_DIR;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_WEB_DIR;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_WEB_FLAG;
+
 /**
  * Android问题列表
  */
 public class QuestionListActivity extends AppCompatActivity {
-
-    /**
-     * 缓存路径
-     */
-    private static final String ANDROID_BASE_DIR = '/' + "androidBaseListCache";
-    private static final String JAVA_QUESTION_DIR = '/' + "javaQuestionsListCache";
-    private static final String ANDROID_SENIOR_DIR = '/' + "androidSeniorListCache";
 
     private String CACHE_DIR = null;//默认缓存目录
 
@@ -53,14 +56,12 @@ public class QuestionListActivity extends AppCompatActivity {
     private List<Subject> androidBaseList = new ArrayList<>();
     private List<JavaQuestions> javaQuestionsList = new ArrayList<>();
     private List<AndroidSenior> androidSeniorList = new ArrayList<>();
+    private List<JavaWebQuestions> javaWebQuestionsList = new ArrayList<>();
 
     private boolean isRefreshOrLoadMore = false;//true:加载更多;false:刷新
     private static final int COUNT = 20;//每页数据个数
 
     private String questionFlag;
-    private static final String JAVA_FLAG = "java";//java题
-    private static final String ANDROID_BASE_FLAG = "android_base";//android基础题
-    private static final String ANDROID_SENIOR_FLAG = "android_senior";//android高级题
 
     private Snackbar snackbar = null;
 
@@ -101,6 +102,11 @@ public class QuestionListActivity extends AppCompatActivity {
                 actionBar.setTitle(R.string.android_senior_questions);
                 //加载缓存数据
                 androidSeniorList = (List<AndroidSenior>) CacheUtils.load(CACHE_DIR + ANDROID_SENIOR_DIR);
+            } else if (questionFlag.equals(JAVA_WEB_FLAG)) {
+                //java web题
+                actionBar.setTitle(R.string.java_web_questions);
+                //加载缓存数据
+                javaWebQuestionsList = (List<JavaWebQuestions>) CacheUtils.load(CACHE_DIR + JAVA_QUESTION_DIR);
             }
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -128,6 +134,8 @@ public class QuestionListActivity extends AppCompatActivity {
                     toResultActivity(position, view.findViewById(R.id.layoutAsk));
                 } else if (questionFlag.equals(ANDROID_SENIOR_FLAG)) {
                     //Android高级
+                    toResultActivity(position, view.findViewById(R.id.layoutAsk));
+                } else if (questionFlag.equals(JAVA_WEB_FLAG)) {
                     toResultActivity(position, view.findViewById(R.id.layoutAsk));
                 }
             }
@@ -172,6 +180,9 @@ public class QuestionListActivity extends AppCompatActivity {
         } else if (questionFlag.equals(ANDROID_SENIOR_FLAG)) {
             //Android高级
             intent.putExtra("question", androidSeniorList.get(position));
+        } else if (questionFlag.equals(JAVA_WEB_FLAG)) {
+            //JavaWeb面试题
+            intent.putExtra("question", javaWebQuestionsList.get(position));
         }
         intent.putExtra("position", position + 1);
 
@@ -216,7 +227,7 @@ public class QuestionListActivity extends AppCompatActivity {
                             //下拉刷新
                             javaQuestionsList = list;
                         }
-                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList);
+                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList, javaWebQuestionsList);
 
                         //缓存数据
                         CacheUtils.save(javaQuestionsList, CACHE_DIR + JAVA_QUESTION_DIR);
@@ -254,7 +265,7 @@ public class QuestionListActivity extends AppCompatActivity {
                             //下拉刷新
                             androidBaseList = list;
                         }
-                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList);
+                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList, javaWebQuestionsList);
 
                         //缓存数据
                         CacheUtils.save(androidBaseList, CACHE_DIR + ANDROID_BASE_DIR);
@@ -291,10 +302,47 @@ public class QuestionListActivity extends AppCompatActivity {
                             //下拉刷新
                             androidSeniorList = list;
                         }
-                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList);
+                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList, javaWebQuestionsList);
 
                         //缓存数据
                         CacheUtils.save(androidSeniorList, CACHE_DIR + ANDROID_SENIOR_DIR);
+
+                    } else {
+                        showSnackBar(mRecyclerView, "网络好像有点问题");
+                    }
+                    //刷新结束
+                    mRecyclerView.setPullLoadMoreCompleted();
+                }
+            });
+        } else if (questionFlag.equals(JAVA_WEB_FLAG)) {
+            //JavaWeb题
+            BmobQuery<JavaWebQuestions> javaWebSeniorQuery = new BmobQuery<>();
+            javaWebSeniorQuery.order("-createdAt");
+            //设置每页数据个数
+            javaWebSeniorQuery.setLimit(COUNT);
+
+            if (isRefreshOrLoadMore) {
+                //加载更多，只查询小于等于最后一个item发表时间的数据
+                int size = javaWebQuestionsList.size() - 1;
+                Date date = strToDate(javaWebQuestionsList.get(size).getCreatedAt());
+                javaWebSeniorQuery.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+            }
+
+            javaWebSeniorQuery.findObjects(new FindListener<JavaWebQuestions>() {
+                @Override
+                public void done(List<JavaWebQuestions> list, BmobException e) {
+                    if (e == null) {
+                        if (isRefreshOrLoadMore) {
+                            //加载更多
+                            javaWebQuestionsList.addAll(list);
+                        } else {
+                            //下拉刷新
+                            javaWebQuestionsList = list;
+                        }
+                        adapter.setDataChange(questionFlag, javaQuestionsList, androidBaseList, androidSeniorList, javaWebQuestionsList);
+
+                        //缓存数据
+                        CacheUtils.save(javaWebQuestionsList, CACHE_DIR + JAVA_WEB_DIR);
 
                     } else {
                         showSnackBar(mRecyclerView, "网络好像有点问题");

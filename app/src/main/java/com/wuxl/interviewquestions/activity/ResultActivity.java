@@ -19,10 +19,16 @@ import android.widget.TextView;
 import com.wuxl.interviewquestions.R;
 import com.wuxl.interviewquestions.bean.AndroidSenior;
 import com.wuxl.interviewquestions.bean.JavaQuestions;
+import com.wuxl.interviewquestions.bean.JavaWebQuestions;
 import com.wuxl.interviewquestions.bean.Subject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_BASE_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_SENIOR_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_WEB_FLAG;
 
 /**
  * 问题答案列表
@@ -38,11 +44,9 @@ public class ResultActivity extends AppCompatActivity {
     private Subject question;//android基础
     private JavaQuestions mJavaQuestions;//Java
     private AndroidSenior mAndroidSenior;//Android高级
+    private JavaWebQuestions mJavaWebQuestions;//Java Web
 
     private String flag;
-    private static final String JAVA_FLAG = "java";//java题
-    private static final String ANDROID_BASE_FLAG = "android_base";//android基础题
-    private static final String ANDROID_SENIOR_FLAG = "android_senior";//android高级题
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,13 +94,18 @@ public class ResultActivity extends AppCompatActivity {
             mAndroidSenior = (AndroidSenior) it.getSerializableExtra("question");
             textAsk.setText(position + "：" + mAndroidSenior.getQuestions());
             textAnswer.setText(mAndroidSenior.getAnswer());
+        } else if (actionBar != null && flag.equals(JAVA_WEB_FLAG)) {
+            //Java Web
+            actionBar.setTitle(R.string.java_web_questions);
+            mJavaWebQuestions = (JavaWebQuestions) it.getSerializableExtra("question");
+            textAsk.setText(position + "：" + mJavaWebQuestions.getQuestions());
+            textAnswer.setText(mJavaWebQuestions.getAnswer());
         }
 
         if (actionBar != null) {
             //返回键
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
 
         //启动动画
         textAsk.post(new Runnable() {

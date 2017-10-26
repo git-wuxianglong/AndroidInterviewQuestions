@@ -10,9 +10,15 @@ import android.widget.TextView;
 import com.wuxl.interviewquestions.R;
 import com.wuxl.interviewquestions.bean.AndroidSenior;
 import com.wuxl.interviewquestions.bean.JavaQuestions;
+import com.wuxl.interviewquestions.bean.JavaWebQuestions;
 import com.wuxl.interviewquestions.bean.Subject;
 
 import java.util.List;
+
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_BASE_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_SENIOR_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_WEB_FLAG;
 
 /**
  * RecyclerViewAdapter
@@ -25,11 +31,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private List<Subject> androidBaseList;
     private List<JavaQuestions> javaQuestionsList;
     private List<AndroidSenior> androidSeniorList;
+    private List<JavaWebQuestions> javaWebQuestionsList;
     private LayoutInflater inflater;
-
-    private static final String JAVA_FLAG = "java";//java题
-    private static final String ANDROID_BASE_FLAG = "android_base";//android基础题
-    private static final String ANDROID_SENIOR_FLAG = "android_senior";//android高级题
 
     public MyRecyclerViewAdapter(Context context, String flag, List<JavaQuestions> javaQuestionsList, List<Subject> androidBaseList, List<AndroidSenior> androidSeniorList) {
         this.context = context;
@@ -41,7 +44,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     }
 
-    public void setDataChange(String flag, List<JavaQuestions> javaQuestionsList, List<Subject> androidBaseList, List<AndroidSenior> androidSeniorList) {
+    public void setDataChange(String flag, List<JavaQuestions> javaQuestionsList, List<Subject> androidBaseList, List<AndroidSenior> androidSeniorList, List<JavaWebQuestions> javaWebList) {
         this.flag = flag;
         //判断数据源
         if (flag.equals(JAVA_FLAG)) {
@@ -50,6 +53,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             this.androidBaseList = androidBaseList;
         } else if (flag.equals(ANDROID_SENIOR_FLAG)) {
             this.androidSeniorList = androidSeniorList;
+        } else if (flag.equals(JAVA_WEB_FLAG)) {
+            this.javaWebQuestionsList = javaWebList;
         }
         this.notifyDataSetChanged();
     }
@@ -98,6 +103,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             //Android高级
             holder.ask.setText(position + 1 + "：" + androidSeniorList.get(position).getQuestions());
             holder.time.setText(androidSeniorList.get(position).getCreatedAt());
+        } else if (flag.equals(JAVA_WEB_FLAG)) {
+            //Java Web
+            holder.ask.setText(position + 1 + "：" + javaWebQuestionsList.get(position).getQuestions());
+            holder.time.setText(javaWebQuestionsList.get(position).getCreatedAt());
         }
     }
 
@@ -109,6 +118,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             return androidBaseList == null ? 0 : androidBaseList.size();
         } else if (flag.equals(ANDROID_SENIOR_FLAG)) {
             return androidSeniorList == null ? 0 : androidSeniorList.size();
+        } else if (flag.equals(JAVA_WEB_FLAG)) {
+            return javaWebQuestionsList == null ? 0 : javaWebQuestionsList.size();
         }
         return 0;
     }

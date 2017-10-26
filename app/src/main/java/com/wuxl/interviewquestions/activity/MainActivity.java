@@ -23,6 +23,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_BASE_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.ANDROID_SENIOR_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_FLAG;
+import static com.wuxl.interviewquestions.AppConfig.JAVA_WEB_FLAG;
+
 /**
  * 主界面
  * Created by wuxianglong on 2016/10/10.
@@ -36,18 +41,18 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout btnAndroidBase;
     @Bind(R.id.btn_android_senior)
     LinearLayout btnAndroidSenior;
+    @Bind(R.id.btn_java_web)
+    LinearLayout btnJavaWeb;
     @Bind(R.id.img_java)
     ImageView imgJava;
     @Bind(R.id.img_android_base)
     ImageView imgAndroidBase;
     @Bind(R.id.img_android_senior)
     ImageView imgAndroidSenior;
+    @Bind(R.id.img_java_web)
+    ImageView imgJavaWeb;
 
     private Intent intent = new Intent();
-
-    private static final String JAVA_FLAG = "java";//java题
-    private static final String ANDROID_BASE_FLAG = "android_base";//android基础题
-    private static final String ANDROID_SENIOR_FLAG = "android_senior";//android高级题
 
     private Drawable drawable;
 
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             startAnimator(imgJava);
             startAnimator(imgAndroidBase);
             startAnimator(imgAndroidSenior);
+            startAnimator(imgJavaWeb);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.btn_java, R.id.btn_android_base, R.id.btn_android_senior})
+    @OnClick({R.id.btn_java, R.id.btn_android_base, R.id.btn_android_senior, R.id.btn_java_web})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_java:
@@ -132,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_android_senior:
                 toQuestionsActivity(ANDROID_SENIOR_FLAG);
+                break;
+            case R.id.btn_java_web:
+                toQuestionsActivity(JAVA_WEB_FLAG);
                 break;
         }
     }
