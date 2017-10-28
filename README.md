@@ -9,6 +9,7 @@
 [豌豆荚（阿里应用分发平台）](http://www.wandoujia.com/apps/com.wuxl.interviewquestions)  
 [百度手机助手](http://shouji.baidu.com/software/11096563.html)  
 [小米应用商店](http://app.mi.com/details?id=com.wuxl.interviewquestions&ref=search)  
-[腾讯应用宝](http://sj.qq.com/myapp/detail.htm?apkName=com.wuxl.interviewquestions)  
+[腾讯应用宝](http://sj.qq.com/myapp/detail.htm?apkName=com.wuxl.interviewquestions)  
+[酷安](https://www.coolapk.com/apk/com.wuxl.interviewquestions)  
 
 欢迎大家下载使用顺便给个star:smile:！  
