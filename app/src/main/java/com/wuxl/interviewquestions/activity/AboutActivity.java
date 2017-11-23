@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.wuxl.interviewquestions.R;
 import com.wuxl.interviewquestions.bean.SubmitQuestions;
 import com.wuxl.interviewquestions.utils.AppUtils;
+import com.wuxl.interviewquestions.utils.SendMsg;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -74,6 +75,7 @@ public class AboutActivity extends AppCompatActivity {
                 dialog.setMessage("项目开源，欢迎大家star和提交issue.");
                 dialog.setPositiveButton("确定", null);
                 dialog.show();
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.text_version_name));
                 break;
             case R.id.submit:
                 //提交
@@ -106,6 +108,7 @@ public class AboutActivity extends AppCompatActivity {
                 Uri content_url = Uri.parse(PROJECT_GITHUB_URL);
                 it.setData(content_url);
                 startActivity(it);
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.text_github_url));
                 break;
             case R.id.alipay:
                 //支付宝捐赠
@@ -123,6 +126,7 @@ public class AboutActivity extends AppCompatActivity {
                 } else {
                     showSnackBar(alipay, "手机上未安装支付宝！");
                 }
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.text_alipay_donate));
                 break;
         }
     }

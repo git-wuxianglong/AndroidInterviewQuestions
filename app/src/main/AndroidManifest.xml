@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 读取LOG -->
+    <!-- 允许读取日志 -->
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
@@ -28,17 +28,19 @@
             </intent-filter>
         </activity>
 
+        <!-- 诸葛io -->
         <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="584a4c56b27b0a0f32000e2a" />
+            android:name="ZHUGE_APPKEY"
+            android:value="dfdd2a47513249f3b8e521381b4c068f" />
+        <!-- 360手机助手 -->
+        <!-- 小米应用商店 -->
+        <!-- 百度手机助手 -->
+        <!-- 腾讯应用宝 -->
+        <!-- 豌豆荚 -->
+        <!-- 酷安 -->
         <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_CALUE}" />
-
-        <!-- bugly渠道统计 -->
-        <meta-data
-            android:name="BUGLY_APP_CHANNEL"
-            android:value="酷安" />
+            android:name="ZHUGE_CHANNEL"
+            android:value="腾讯应用宝" />
 
         <activity
             android:name=".activity.QuestionListActivity"

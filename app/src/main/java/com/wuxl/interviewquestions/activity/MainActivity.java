@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.wuxl.interviewquestions.R;
+import com.wuxl.interviewquestions.utils.SendMsg;
 
 import java.lang.reflect.Field;
 
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_about) {
+            SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_about));
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
         }
         return super.onOptionsItemSelected(item);
@@ -151,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
      * @param flag
      */
     private void toQuestionsActivity(String flag) {
+        SendMsg.sendMsgToZhuge(this, flag);
         if (!TextUtils.isEmpty(flag)) {
             intent.putExtra("flag", flag);
             intent.setClass(MainActivity.this, QuestionListActivity.class);

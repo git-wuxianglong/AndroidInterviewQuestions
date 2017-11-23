@@ -3,8 +3,10 @@ package com.wuxl.interviewquestions;
 import android.app.Application;
 
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zhuge.analysis.stat.ZhugeSDK;
 
 import cn.bmob.v3.Bmob;
+
 
 /**
  * Application
@@ -18,7 +20,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Bmob.initialize(this, APPLICATION_ID);
+        //初始化Bmob
+        Bmob.initialize(getApplicationContext(), APPLICATION_ID);
+        //初始化分析跟踪
+        ZhugeSDK.getInstance().init(getApplicationContext());
+        //初始化Bugly
         CrashReport.initCrashReport(getApplicationContext(), BUGLY_ID, false);
     }
 }

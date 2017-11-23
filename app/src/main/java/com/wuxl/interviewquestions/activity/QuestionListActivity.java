@@ -22,6 +22,7 @@ import com.wuxl.interviewquestions.bean.JavaQuestions;
 import com.wuxl.interviewquestions.bean.JavaWebQuestions;
 import com.wuxl.interviewquestions.bean.Subject;
 import com.wuxl.interviewquestions.utils.CacheUtils;
+import com.wuxl.interviewquestions.utils.SendMsg;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -196,6 +197,7 @@ public class QuestionListActivity extends AppCompatActivity {
         } else {
             startActivity(intent);
         }
+        SendMsg.sendMsgToZhuge(this, questionFlag + "第" + position + "题");
     }
 
     /**
@@ -383,6 +385,7 @@ public class QuestionListActivity extends AppCompatActivity {
         int id = item.getItemId();
         //关于
         if (id == R.id.action_about) {
+            SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_about));
             startActivity(new Intent(QuestionListActivity.this, AboutActivity.class));
         }
         //返回
