@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Android面试题</string>
+    <string name="icon_name">面试题</string>
     <string name="action_about">关于</string>
+    <string name="action_setting">设置</string>
     <string name="exit_app_hint">再按一退出程序</string>
     <string name="submit_question">提交你遇到的面试题或BUG</string>
     <string name="submit_issues">程序有BUG或者有面试问题都可以从这提交</string>
@@ -16,5 +18,14 @@
     <string name="android_base_questions">Android基础面试题</string>
     <string name="android_senior_questions">Android高级面试题</string>
     <string name="java_web_questions">JavaWeb面试题</string>
+
+    <string name="setting_show">显示设置</string>
+    <string name="is_show_javaweb">是否显示JavaWeb面试题</string>
+    <string name="is_show_androidbase">是否显示Android基础面试题</string>
+    <string name="is_show_android_senior">是否显示Android高级面试题</string>
+    <string name="is_show_java">是否显示Java面试题</string>
+
+    <string name="setting_other">其它设置</string>
+    <string name="nothing">暂无</string>
 
 </resources>

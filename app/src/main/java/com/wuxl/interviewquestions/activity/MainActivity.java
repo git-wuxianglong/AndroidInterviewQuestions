@@ -15,7 +15,9 @@ import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.wuxl.interviewquestions.AppConfig;
 import com.wuxl.interviewquestions.R;
+import com.wuxl.interviewquestions.utils.CacheUtils;
 import com.wuxl.interviewquestions.utils.SendMsg;
 
 import java.lang.reflect.Field;
@@ -33,8 +35,9 @@ import static com.wuxl.interviewquestions.AppConfig.JAVA_WEB_FLAG;
  * 主界面
  * Created by wuxianglong on 2016/10/10.
  */
-
 public class MainActivity extends AppCompatActivity {
+
+    private String CACHE_DIR = null;
 
     @Bind(R.id.btn_java)
     LinearLayout btnJava;
@@ -57,12 +60,31 @@ public class MainActivity extends AppCompatActivity {
 
     private Drawable drawable;
 
+    //是否显示JavaWeb
+    private boolean showJavaWeb = true;
+
+    private String isExists;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         makeActionOverflowMenuShown();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setting();
+    }
+
+    /**
+     * 初始化一些设置
+     */
+    private void setting() {
+        //缓存目录
+        CACHE_DIR = this.getCacheDir().getPath();
+        //在文件不存在的情况下，返回的为null
+        if (CacheUtils.load(CACHE_DIR + AppConfig.SETTING_DIR) == null) {
+            //默认显示为true，进行保存
+            CacheUtils.save(showJavaWeb, CACHE_DIR + AppConfig.SETTING_DIR);
+        }
     }
 
     @Override
@@ -76,6 +98,20 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //显示或隐藏Java web
+        setShowJavaWeb();
+    }
+
+    /**
+     * 是否显示Java web
+     */
+    private void setShowJavaWeb() {
+        showJavaWeb = (boolean) CacheUtils.load(CACHE_DIR + AppConfig.SETTING_DIR);
+        if (!showJavaWeb)
+            btnJavaWeb.setVisibility(View.GONE);
+        else
+            btnJavaWeb.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -87,9 +123,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_about) {
-            SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_about));
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+        switch (id) {
+            case R.id.action_about:
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_about));
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                break;
+            case R.id.action_setting:
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_setting));
+                startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

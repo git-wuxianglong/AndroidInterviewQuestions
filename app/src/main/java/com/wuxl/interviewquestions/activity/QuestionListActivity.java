@@ -197,7 +197,6 @@ public class QuestionListActivity extends AppCompatActivity {
         } else {
             startActivity(intent);
         }
-        SendMsg.sendMsgToZhuge(this, questionFlag + "第" + position + "题");
     }
 
     /**
@@ -383,14 +382,21 @@ public class QuestionListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        //关于
-        if (id == R.id.action_about) {
-            SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_about));
-            startActivity(new Intent(QuestionListActivity.this, AboutActivity.class));
-        }
-        //返回
-        if (id == android.R.id.home) {
-            finish();
+        switch (id) {
+            case R.id.action_about:
+                //关于
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_about));
+                startActivity(new Intent(QuestionListActivity.this, AboutActivity.class));
+                break;
+            case R.id.action_setting:
+                //设置
+                SendMsg.sendMsgToZhuge(this, getResources().getString(R.string.action_setting));
+                startActivity(new Intent(QuestionListActivity.this, SettingActivity.class));
+                break;
+            case android.R.id.home:
+                //返回
+                finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

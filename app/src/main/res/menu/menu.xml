@@ -4,6 +4,13 @@
     tools:context=".activity.QuestionListActivity">
 
     <item
+        android:id="@+id/action_setting"
+        android:icon="@mipmap/ic_more_vert_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_setting"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_about"
         android:icon="@mipmap/ic_more_vert_white_24dp"
         android:orderInCategory="100"

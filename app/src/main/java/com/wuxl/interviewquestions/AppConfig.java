@@ -19,4 +19,6 @@ public class AppConfig {
     public static final String ANDROID_SENIOR_DIR = '/' + "androidSeniorListCache";
     public static final String JAVA_WEB_DIR = '/' + "javaWebListCache";
 
+    public static final String SETTING_DIR = '/' + "setting";
+
 }
