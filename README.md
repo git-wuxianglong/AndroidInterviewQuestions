@@ -12,4 +12,4 @@
 [腾讯应用宝](http://sj.qq.com/myapp/detail.htm?apkName=com.wuxl.interviewquestions)  
 [酷安](https://www.coolapk.com/apk/com.wuxl.interviewquestions)  
 
-欢迎大家下载使用顺便给个star:smile:！  
+欢迎大家下载使用顺便给个star:smile:！ 
